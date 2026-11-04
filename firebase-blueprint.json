@@ -1,0 +1,340 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with role and access details",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "socio", "operacional", "engenheiro", "financeiro"] },
+        "phone": { "type": "string" },
+        "crea": { "type": "string" },
+        "active": { "type": "boolean" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["uid", "name", "email", "role"]
+    },
+    "CompanySettings": {
+      "title": "CompanySettings",
+      "description": "Company institutional data, CREA, and defaults",
+      "type": "object",
+      "properties": {
+        "corporateName": { "type": "string" },
+        "tradeName": { "type": "string" },
+        "cnpj": { "type": "string" },
+        "crea": { "type": "string" },
+        "technicalResponsible": { "type": "string" },
+        "technicalResponsibleCrea": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "address": { "type": "string" },
+        "city": { "type": "string" },
+        "state": { "type": "string" },
+        "website": { "type": "string" }
+      }
+    },
+    "Client": {
+      "title": "Client",
+      "description": "Customer record for condominiums, companies, individuals, or law firms",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "type": { "type": "string", "enum": ["condominio", "empresa", "pessoa_fisica", "escritorio_advocacia", "construtora", "outro"] },
+        "document": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "address": { "type": "string" },
+        "city": { "type": "string" },
+        "state": { "type": "string" },
+        "cep": { "type": "string" },
+        "contactPerson": { "type": "string" },
+        "notes": { "type": "string" },
+        "commercialResponsible": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "name", "type"]
+    },
+    "Opportunity": {
+      "title": "Opportunity",
+      "description": "CRM commercial deal and pipeline stage",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "clientId": { "type": "string" },
+        "clientName": { "type": "string" },
+        "title": { "type": "string" },
+        "stage": { "type": "string", "enum": ["novo_contato", "solicitacao_recebida", "em_analise", "visita_necessaria", "proposta_elaboracao", "proposta_enviada", "em_negociacao", "aprovada", "perdida"] },
+        "estimatedValue": { "type": "number" },
+        "serviceCategory": { "type": "string" },
+        "notes": { "type": "string" },
+        "responsible": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "clientId", "title", "stage"]
+    },
+    "Proposal": {
+      "title": "Proposal",
+      "description": "Technical and commercial proposal with scopes, terms and pricing",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "code": { "type": "string" },
+        "sequence": { "type": "number" },
+        "clientId": { "type": "string" },
+        "clientName": { "type": "string" },
+        "opportunityId": { "type": "string" },
+        "serviceCategory": { "type": "string" },
+        "serviceType": { "type": "string" },
+        "object": { "type": "string" },
+        "address": { "type": "string" },
+        "scope": { "type": "string" },
+        "methodology": { "type": "string" },
+        "applicableStandards": { "type": "string" },
+        "deliverables": { "type": "string" },
+        "limitations": { "type": "string" },
+        "executionPeriod": { "type": "string" },
+        "validityPeriod": { "type": "string" },
+        "totalValue": { "type": "number" },
+        "paymentTerms": { "type": "string" },
+        "status": { "type": "string", "enum": ["elaboracao", "revisao", "aprovada_internamente", "enviada", "negociacao", "aprovada_cliente", "recusada", "expirada"] },
+        "responsible": { "type": "string" },
+        "version": { "type": "number" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "code", "clientId", "totalValue", "status"]
+    },
+    "Service": {
+      "title": "Service",
+      "description": "Contracted project or engineering diagnostic service",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "code": { "type": "string" },
+        "proposalId": { "type": "string" },
+        "clientId": { "type": "string" },
+        "clientName": { "type": "string" },
+        "title": { "type": "string" },
+        "serviceCategory": { "type": "string" },
+        "address": { "type": "string" },
+        "technicalLead": { "type": "string" },
+        "team": { "type": "string" },
+        "startDate": { "type": "string" },
+        "expectedEndDate": { "type": "string" },
+        "contractedValue": { "type": "number" },
+        "currentStage": { "type": "string" },
+        "status": { "type": "string", "enum": ["planejamento", "em_andamento", "em_revisao", "concluido", "suspenso"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "code", "clientId", "title", "status"]
+    },
+    "Inspection": {
+      "title": "Inspection",
+      "description": "On-site survey, inspection or technical visit record with checklist and photos",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "serviceId": { "type": "string" },
+        "clientId": { "type": "string" },
+        "clientName": { "type": "string" },
+        "type": { "type": "string" },
+        "address": { "type": "string" },
+        "date": { "type": "string" },
+        "time": { "type": "string" },
+        "responsible": { "type": "string" },
+        "status": { "type": "string", "enum": ["agendada", "em_campo", "finalizada", "cancelada"] },
+        "objective": { "type": "string" },
+        "scope": { "type": "string" },
+        "checklist": { "type": "string" },
+        "findings": { "type": "string" },
+        "conclusion": { "type": "string" },
+        "googleCalendarEventId": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "type", "date", "status"]
+    },
+    "ExpertCase": {
+      "title": "ExpertCase",
+      "description": "Judicial or extrajudicial expert witness case (Perícia Judicial)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "caseNumber": { "type": "string" },
+        "court": { "type": "string" },
+        "branch": { "type": "string" },
+        "district": { "type": "string" },
+        "judge": { "type": "string" },
+        "plaintiff": { "type": "string" },
+        "defendant": { "type": "string" },
+        "appointmentDate": { "type": "string" },
+        "feeAcceptanceDate": { "type": "string" },
+        "fees": { "type": "number" },
+        "proceduralDeadline": { "type": "string" },
+        "inspectionDate": { "type": "string" },
+        "reportDeliveryDeadline": { "type": "string" },
+        "status": { "type": "string", "enum": ["nomeacao", "proposta_honorarios", "diligencia_agendada", "laudo_em_elaboracao", "laudo_entregue", "esclarecimentos", "encerrado"] },
+        "questions": { "type": "string" },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "caseNumber", "court", "status"]
+    },
+    "TechnicalDocument": {
+      "title": "TechnicalDocument",
+      "description": "Technical reports, laudos, ARTs, inspection reports",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "type": { "type": "string", "enum": ["laudo_inspecao", "laudo_patologia", "laudo_pericial", "parecer_tecnico", "relatorio_fotografico", "art", "proposta", "contrato", "outro"] },
+        "serviceId": { "type": "string" },
+        "clientId": { "type": "string" },
+        "author": { "type": "string" },
+        "version": { "type": "number" },
+        "status": { "type": "string", "enum": ["elaboracao", "aguardando_revisao", "em_revisao", "aprovado", "entregue", "arquivado"] },
+        "content": { "type": "string" },
+        "fileUrl": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "title", "type", "status"]
+    },
+    "Task": {
+      "title": "Task",
+      "description": "Internal administrative or technical task",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "responsible": { "type": "string" },
+        "priority": { "type": "string", "enum": ["baixa", "media", "alta", "urgente"] },
+        "dueDate": { "type": "string" },
+        "status": { "type": "string", "enum": ["pendente", "em_andamento", "concluida", "atrasada"] },
+        "category": { "type": "string" },
+        "clientId": { "type": "string" },
+        "serviceId": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "title", "status", "priority"]
+    },
+    "CalendarEvent": {
+      "title": "CalendarEvent",
+      "description": "Internal and Google Calendar synced appointments",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "type": { "type": "string" },
+        "clientId": { "type": "string" },
+        "serviceId": { "type": "string" },
+        "responsible": { "type": "string" },
+        "startDate": { "type": "string" },
+        "endDate": { "type": "string" },
+        "location": { "type": "string" },
+        "description": { "type": "string" },
+        "googleCalendarEventId": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "title", "startDate", "endDate"]
+    },
+    "FinancialEntry": {
+      "title": "FinancialEntry",
+      "description": "Accounts receivable and payable, installments and payments",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "type": "string", "enum": ["receita", "despesa"] },
+        "category": { "type": "string" },
+        "description": { "type": "string" },
+        "value": { "type": "number" },
+        "dueDate": { "type": "string" },
+        "paymentDate": { "type": "string" },
+        "paymentMethod": { "type": "string" },
+        "status": { "type": "string", "enum": ["previsto", "a_vencer", "pago", "vencido", "cancelado"] },
+        "clientId": { "type": "string" },
+        "serviceId": { "type": "string" },
+        "proposalId": { "type": "string" },
+        "receiptNotes": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "type", "description", "value", "dueDate", "status"]
+    },
+    "ActivityLog": {
+      "title": "ActivityLog",
+      "description": "Audit trail log of actions taken in the platform",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "action": { "type": "string" },
+        "entityType": { "type": "string" },
+        "entityId": { "type": "string" },
+        "details": { "type": "string" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["id", "action", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "User profiles and permissions"
+    },
+    "/company_settings/{settingId}": {
+      "schema": { "$ref": "#/entities/CompanySettings" },
+      "description": "Company profile and institutional parameters"
+    },
+    "/clients/{clientId}": {
+      "schema": { "$ref": "#/entities/Client" },
+      "description": "Clients, condominiums, and contacts"
+    },
+    "/opportunities/{opportunityId}": {
+      "schema": { "$ref": "#/entities/Opportunity" },
+      "description": "Commercial pipeline deals"
+    },
+    "/proposals/{proposalId}": {
+      "schema": { "$ref": "#/entities/Proposal" },
+      "description": "Technical & commercial proposals"
+    },
+    "/services/{serviceId}": {
+      "schema": { "$ref": "#/entities/Service" },
+      "description": "Active and completed engineering services"
+    },
+    "/inspections/{inspectionId}": {
+      "schema": { "$ref": "#/entities/Inspection" },
+      "description": "On-site surveys and technical inspections"
+    },
+    "/expert_cases/{caseId}": {
+      "schema": { "$ref": "#/entities/ExpertCase" },
+      "description": "Judicial and extrajudicial expert witness cases"
+    },
+    "/technical_documents/{docId}": {
+      "schema": { "$ref": "#/entities/TechnicalDocument" },
+      "description": "Technical reports, laudos, and ARTs"
+    },
+    "/tasks/{taskId}": {
+      "schema": { "$ref": "#/entities/Task" },
+      "description": "Internal tasks and operational deadlines"
+    },
+    "/calendar_events/{eventId}": {
+      "schema": { "$ref": "#/entities/CalendarEvent" },
+      "description": "Calendar events and Google Calendar sync"
+    },
+    "/financial_entries/{entryId}": {
+      "schema": { "$ref": "#/entities/FinancialEntry" },
+      "description": "Financial income and expense entries"
+    },
+    "/activity_logs/{logId}": {
+      "schema": { "$ref": "#/entities/ActivityLog" },
+      "description": "Audit trail log entries"
+    }
+  }
+}

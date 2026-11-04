@@ -1,0 +1,6 @@
+{
+  "name": "Bertacini Engenharia | Gestão Integrada",
+  "description": "Plataforma integrada de gestão para engenharia diagnóstica, inspeções prediais, perícias, laudos, propostas comerciais e controle financeiro.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
